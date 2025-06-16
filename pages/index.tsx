@@ -1,31 +1,28 @@
-export default function LanguageSelector() {
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import i18n from '../bw-i18n-locales/lib/i18n'
+
+export default function Home() {
+  const router = useRouter()
+  const { locale } = router
+
+  useEffect(() => {
+    if (!locale) return
+    if (locale === 'fr') router.push('/fr')
+    else if (locale === 'es') router.push('/es')
+    else router.push('/en')
+  }, [locale])
+
   return (
-    <div style={{
-      height: '100vh',
-      backgroundColor: 'black',
-      color: 'white',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontFamily: 'serif'
-    }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Choisis ta langue / Choose your language / Elige tu idioma</h1>
-      <div style={{ display: 'flex', gap: '1.5rem' }}>
-        <Link href="/fr"><button style={btnStyle}>Français</button></Link>
-        <Link href="/en"><button style={btnStyle}>English</button></Link>
-        <Link href="/es"><button style={btnStyle}>Español</button></Link>
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>B*WITCH*</title>
+      </Head>
+      <main className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
+        <h1 className="text-4xl font-bold">B*WITCH*</h1>
+        <p className="mt-4">Redirection basée sur ta langue...</p>
+      </main>
+    </>
   )
 }
-
-const btnStyle = {
-  backgroundColor: 'white',
-  color: 'black',
-  border: 'none',
-  padding: '0.75rem 1.5rem',
-  fontSize: '1rem',
-  cursor: 'pointer',
-  borderRadius: '0.5rem'
-};
